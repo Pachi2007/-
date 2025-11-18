@@ -1,23 +1,72 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>I MISS HER</title>
-<style>
-    body {
-        background: #000;
-        color: #fff;
-        font-size: 50px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        margin: 0;
-        font-family: Arial, sans-serif;
-    }
+<!doctype html>
+font-weight:600;
+cursor:pointer;
+box-shadow: 0 6px 18px rgba(30,20,60,0.28);
+}
+
+
+footer{
+margin-top:28px;
+font-size:12px;
+color:rgba(255,255,255,0.6);
+}
+
+
+@media (prefers-reduced-motion: reduce){
+h1{animation:none}
+}
 </style>
 </head>
 <body>
-I MISS HER
+<div class="card">
+<h1 id="bigText">always thinking about her, I don't know if I still have a chance, I know I'm not good,BUT I MISS HER :)</h1>
+<p class="lead">A minimal one-file page. Change the words below, then click "Update" to see it reflected instantly.</p>
+
+
+<div class="controls">
+<input id="textInput" type="text" value="I MISS HER" aria-label="Text to display">
+<button id="updateBtn">Update</button>
+<button id="downloadBtn">Download HTML</button>
+</div>
+
+
+<footer>Made with ♥ — Save this file as <code>index.html</code> and push to GitHub to publish.</footer>
+</div>
+
+
+<script>
+const input = document.getElementById('textInput');
+const big = document.getElementById('bigText');
+const update = document.getElementById('updateBtn');
+const download = document.getElementById('downloadBtn');
+
+
+update.addEventListener('click', ()=>{
+const v = input.value.trim() || 'I MISS HER';
+big.textContent = v;
+});
+
+
+// Create a downloadable HTML file reflecting the current text
+download.addEventListener('click', ()=>{
+const v = input.value.trim() || 'I MISS HER';
+const doc = `<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width,initial-scale=1\">\n<title>${v}</title>\n<style>body{display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#0b1020;color:#fff;font-family:Inter,Arial;text-align:center}h1{font-size:64px}</style>\n</head>\n<body><h1>${v}</h1></body></html>`;
+const blob = new Blob([doc], {type:'text/html'});
+const url = URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+a.download = 'index.html';
+document.body.appendChild(a);
+a.click();
+a.remove();
+URL.revokeObjectURL(url);
+});
+
+
+// allow Enter key to update
+input.addEventListener('keydown', (e)=>{
+if(e.key === 'Enter') update.click();
+});
+</script>
 </body>
 </html>
